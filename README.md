@@ -4,7 +4,7 @@
 
 ## Installing - 專案安裝流程
 
- 1. 打開終端機,並clon此專案至本機
+ 1. 打開終端機,並clone此專案至本機
 
       git clon https://github.com/DanielGG1024/AC_2-3_movie_list_express
 
