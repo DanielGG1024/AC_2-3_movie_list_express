@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const movieList = require('./movies.json')
 const port = 3000
 
 const exphbs = require('express-handlebars')
@@ -11,43 +12,16 @@ app.use(express.static('public'))
 
 
 app.get('/', (req, res) => {
-    const movieOne = [{
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }, {
-        id: 1,
-        title: 'FuCK FUCK fUCk',
-        image: 'https://movie-list.alphacamp.io/posters/2slvblTroiT1lY9bYLK7Amigo1k.jpg'
-    }]
     const numberList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    res.render('index', { movies: movieOne, numbers: numberList })
+    res.render('index', { movies: movieList.results, numbers: numberList })
 })
 
+app.get('/movies/:movie_id', (req, res) => {
+   const movie = movieList.results.find(movie => movie.id.toString() === req.params.movie_id)    
+    // console.log(req.params.movie_id)
+    console.log(movie)
+    res.render('show', {movie:movie})
+})
 app.listen(port, () => {
     console.log(`On http://localhost:${port}`)
-}) 
+})
