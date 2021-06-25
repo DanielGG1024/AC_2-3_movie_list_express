@@ -16,12 +16,21 @@ app.get('/', (req, res) => {
     res.render('index', { movies: movieList.results, numbers: numberList })
 })
 
+//query
+app.get('/search', (req, res) => {
+    console.log(req.query.keyword)
+    const movies = movieList.results.filter(movie => movie.title.toLowerCase().includes(req.query.keyword.toLowerCase()))
+    res.render('index', { movies: movies, keyword: req.query.keyword })
+})
+
+//params
 app.get('/movies/:movie_id', (req, res) => {
-   const movie = movieList.results.find(movie => movie.id.toString() === req.params.movie_id)    
+    const movie = movieList.results.find(movie => movie.id.toString() === req.params.movie_id)
     // console.log(req.params.movie_id)
     console.log(movie)
-    res.render('show', {movie:movie})
+    res.render('show', { movie: movie })
 })
+
 app.listen(port, () => {
     console.log(`On http://localhost:${port}`)
 })
